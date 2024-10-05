@@ -1,0 +1,112 @@
+% TeX root: ../Main.tex
+
+\section{Lecture 1}
+
+\subsection{Groups and subgroups}
+\begin{boxedDefinition}[Group]\label{def:group-def}
+    
+Let $G$ be a set together with a composition law, denoted $\cdot$ , following the following properties:
+\begin{enumerate}
+\item\label{def:group-def-associativity} For any $a, b, c$ in $G$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$ \textit{(Associativity of the law)}
+\item\label{def:group-def-neutral-element} There exists an identity element $1_G$ in $G$ such that for any $a$ in $G$, $a\cdot 1_G = 1_G\cdot a = a$ \textit{(Identity element)}
+\item \label{def:group-def-inverse} Each element $a$ in $G$ has an inverse $b$ satisfying: $a \cdot b = b \cdot a = 1_G$ \textit{(Inverse element)}
+\end{enumerate} 
+\end{boxedDefinition}
+
+\begin{boxedDefinition}[Order]\label{def:group-order}
+    The \textit{\textbf{order}} of a group $(G, \cdot)$, denoted $|G|$, is the number of elements that it contains.
+\end{boxedDefinition}
+ If $|G|$ is finite, $G$ is said to be a \textit{\textbf{Finite group}}, if not then $G$ is an \textit{\textbf{Infinite group}}
+
+
+    \begin{example}
+        
+        \item []\label{ex:group-examples}
+        \begin{itemize}
+        \item[$(\Z, +)$]: The set of integers, with addition as its law of composition, -- the \textit{additive group of integers}. 
+        \item[$(\R, +)$]: The set of real numbers, with addition as its law of composition -- the \textit{additive group of real numbers}
+        \item[$(\R^*, \cdot)$]: The set of \textbf{nonzero} real numbers with multiplication as its law of composition -- the multiplicative group
+        \item[$(\C, +), (\C^*, \cdot)$]: Analogous groups, where $\C$ (resp. $\C^*$), the set of complex numbers (resp. nonzero complex numbers), replaces $\R$ (resp. $\R^\times$).
+        \item[$(GL_n, \cdot)$]: The set of \textit{\textbf{Invertible}}  $n \times n$ matrices, with the matrix multiplication as its composition law, also named the \textit{general linear group}. 
+        \item[$(Sym(X), \circ)$]: The set of all \textbf{\textit{bijective}} maps $f: X \longrightarrow X$, together with the \textit{composition of function} as a law, forms a group, usually called the \textit{symmetric group of the set $X$}. 
+        \end{itemize}
+
+\end{example}
+
+\begin{remark}
+
+    \begin{enumerate}
+        \item[]
+        \item In practice, to refer to a group $(G, \cdot)$, where $\cdot$ is its composition law, we usually just use "$G$", especially when the set has a "natural" law (e.g. addition for integers, composition of function for sets of functions). When an arbitrary group is discussed, it is also common to refer to the law as "multiplication", this does not mean that the involved set is a set of numbers.
+        \item The identity element is usually denoted just $1$, $1_G$, $e$, or $e_G$.
+        \item The inverse of an element $a$ in $G$ is denoted $a^{-1}$. 
+        \item If $G$ is a group whose law satisfies $ab = ba$ for any $a, b$ in $G$, then $G$ is said to be \textit{\textbf{Abelian}}. The list of examples above contains only one non-Abelian groups. 
+        
+        \item We notice that the constraint to take \textit{only} invertible (resp. nonzero) matrices (resp. real numbers) is necessary in order to fulfill property \ref{def:group-def-inverse} of a group.
+More generally, in possession of a set $S$, with an associative law, and an element who does not affect the law\footnote{element $e$ satisfying $ae = ea = a$ for all $a$ in the set}, it is always possible to form a group, by considering only the subset of $S$ whose elements all have inverses in $S$ (in the sense of \ref{def:group-def}.\ref{def:group-def-inverse}).
+       
+    \end{enumerate}
+\end{remark} 
+
+\begin{boxedProposition} [Cancellation law]
+    let $G$ be a group and $a, b, c$ be elements of $G$.\begin{itemize}
+     \item If $ab = ac$ or $ba = ca$, then $b=c$
+     \item If $ab = a$ or $ba = a$, then $b=1$
+    \end{itemize}
+\end{boxedProposition}
+\begin{proof}
+    Suppose $ab = ac$, then: $\underbrace{(a^{-1})ab}_{=1b} = \underbrace{(a^{-1})ac}_{=1c}$.
+\end{proof}
+The other proofs are analogous
+
+\begin{boxedDefinition}[Subgroups]\label{def:subgroup}
+    let $G$ be a group. A subset $H$ of $G$ is called a \textit{subgroup} of $G$ if it satisfies the following conditions:
+    \begin{enumerate}  
+        \item \label{def:subgroup-closure} for any $h$ and $k$ in $H$, $hk$ is in $H$. \textit{($H$ is "closed under the law")}
+        \item \label{def:subgroup-identity} the identity element of $G$, $1_G$ is contained in $H$.
+        \item \label{def:subgroup-inverse} for any $h$ in $H$, its inverse $h^{-1}$ is also contained in $H$
+    \end{enumerate}
+\end{boxedDefinition}
+
+\begin{boxedRemark} \label{rem:induction-closure}
+    If $H$ is a subgroup of $G$, then the closure property implies that if an element $a$ is in $H$, then for any positive integer $n$, $a^n$ = $a \cdot \hdots \cdot a$ ($n$ times) is also in $G$ by using induction: 
+\end{boxedRemark}
+\begin{proof}
+    Let $a$ be an element in a subgroup $H$ of $G$. 
+
+    ($n = 1$): $a^1 = a$ and $a$ is in $H$. 
+
+    Let $k > 1$ and assume $a^k$ is in $H$. By this induction assumption, $a^k$ is in $H$, and since $a$ is in $H$, by closure : $a^k \cdot a = \underbrace{a \cdot \hdots \cdot a}_{k times} = a^{k+1}$ is also in $H$.
+\end{proof}
+
+\begin{example}
+    \begin{itemize} \label{ex:subgroups-ex}
+        \item[]
+ \item For any group $G$, $G$ is a subgroup itself, and so is the subset $\{1_G\}$, the latter is called \textit{the trivial subgroup}
+        \item The set of \textit{even integers} is a subgroup of the additive integer group: $\Z2 = \{k2 | k \in \Z\} \subset \Z$.
+        Note that here the law is addition, the identity element of the group is $0$, and the inverse of an element $p$ is $(-p)$. Keeping these in mind, the properties to check are if $0$ belongs to the subset, if the inverse $-a$ of an even integer is even, and if the sum $a + b$ of two even integers $a$ and $b$ is even
+        
+        (Question: \textit{Is the set of \textbf{odd} integers a \textbf{subgroup} of $\Z$?} \label{ex:subgroup-even-int})
+    \item The set of invertible matrices \textit{with determinant 1}: $\{M \in GL_n | det(M) = 1\} \subset GL_n$ is a subgroup of $GL_n$: it is easy to show that this subset satisfies the properties, by keeping in in mind that $det(AB) = det(A)det(B)$ for any two matrices in $GL_n$. This subgroup is also denoted $SL_n$ and is called the \textit{Special linear group}
+    \item The set of complex numbers, whose modulus is equal to 1, is a subgroup of the multiplicative group of complex numbers: $\{z \in \C | |z| = 1\} \subset \C^*$. Also called \textit{Circle group}, since its elements correspond to the points of the complex plane who lie on the unit circle.
+    \end{itemize}
+\end{example}
+The two last examples are particular cases of a more general way to \textit{find} subgroups of a given group, by using a mapping from a group to another one and adding some additional constraints(here they are $det: GL_n \longrightarrow \R^*$, and $|\cdot|: \C^* \longrightarrow \R^*$). (section \ref{sec:morphisms} contains the details).
+
+\subsection{$(\Z, +)$ and its subgroups}
+We will keep in mind what has been explained on the additive integer group in the second example from second example in \ref{ex:subgroups-ex}.
+
+The following theorem gives a characterization\footnote{a precise criteria that is particular to} of the subgroups of $\Z$
+\begin{boxedTheorem}[Subgroups of $(\Z, +)$]
+    Let $S$ be a subgroup of $(\Z, +)$ that is not trivial ($\neq \{0\}$). Then $S$ has the form $\Z a$, where $a$ is the smallest positive integer in $S$.
+\end{boxedTheorem}
+\begin{proof}
+    Let $S$ be a non-trivial subgroup of $(\Z, +)$. By this assumption, $S$ contains an integer $n$ different from $0$, and either $n$ or $-n$ (its inverse) is positive. Since $S$ is a subgroup, both $n$ and $-n$ are in $S$, meaning $S$ necessarily contains a positive integer. Let $a$ be the smallest positive integer in $S$.
+
+    We first show that $\Z a$ is contained in $S$: Let $k$ be an integer, $ka$ is equal to $\underbrace{a + \hdots + a}_{k terms}$ if $k > 0$, or its inverse: $-(\underbrace{a + \hdots + a}_{|k| terms})$ if $k < 0$. In either case, the sum $(a + \hdots + a)$ is in $S$\footnote{This is the additive version of remark \ref{rem:induction-closure}}, and so is its inverse. 
+
+    Next we show that $S$ is contained in $\Z a$, in other ways we are going to show that all elements of $S$ is necessarily of the form $ka$ for some integer $k$. Let $n$ be an integer in $S$, dividing $n$ by $a$ gives us two integers $q$ and $r$ such that $n = q\cdot a + r$, where $0 \leq r < a$. Since $r = n - q\cdot a$, $r$ is in $S$, and so $r$ cannot be positive as $a$  is the smallest such integer in $S$ (by choice). Thus $r = 0$ and $n = q\cdot a \in \Z a$
+\end{proof}
+
+\subsection{Cyclic groups}
+\subsection{Homomorphisms, Isomorphisms}\label{sec:morphisms}
