@@ -12,6 +12,9 @@
 % Extended set of colors
 \usepackage[dvipsnames]{xcolor}
 
+% for diagrams 
+\usepackage{tikz}
+
 % for boxes around stuff
 \usepackage{mdframed}
 
@@ -179,13 +182,14 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 \newmdtheoremenv{boxedTheorem}{Theorem}
-\newmdtheoremenv{boxedProposition}{Proposition}
+\newmdtheoremenv[rightline=false, topline=false, leftline=true, bottomline=false]{boxedProposition}{Proposition}
 \newmdtheoremenv{boxedLemma}{Lemma}
 \newmdtheoremenv{boxedCorollary}{Corollary}
 \newmdtheoremenv[rightline=false, topline=false, leftline=true, bottomline=false]{boxedDefinition}{Definition}
 \newmdtheoremenv{boxedExample}{Example}
-\newmdtheoremenv{boxedRemark}{Remark}
+\newmdtheoremenv[rightline=false, topline=false, leftline=true, bottomline=false]{boxedRemark}{Remark}
 \newmdtheoremenv{boxedProblem}{Problem}
+\newmdtheoremenv{boxedProblemExtra}{Extra problem}
 
 % Un-numbered theorem, lemma, etc. settings
 % Example usage: \begin{lemma*}[Name of lemma] Lemma statement \end{lemma*}
@@ -248,6 +252,7 @@
 \newpage
 \section{Problems and solutions}
 \input{Problems/week_1.tex}
+\input{Problems/week_2.tex}
 
 \newpage
 \bibliography{bibliographie}

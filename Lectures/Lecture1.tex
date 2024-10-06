@@ -2,7 +2,7 @@
 
 \section{Lecture 1}
 
-\subsection{Groups and subgroups}
+\subsection{Groups}
 \begin{boxedDefinition}[Group]\label{def:group-def}
     
 Let $G$ be a set together with a composition law, denoted $\cdot$ , following the following properties:
@@ -40,7 +40,8 @@ Let $G$ be a set together with a composition law, denoted $\cdot$ , following th
         \item In practice, to refer to a group $(G, \cdot)$, where $\cdot$ is its composition law, we usually just use "$G$", especially when the set has a "natural" law (e.g. addition for integers, composition of function for sets of functions). When an arbitrary group is discussed, it is also common to refer to the law as "multiplication", this does not mean that the involved set is a set of numbers.
         \item The identity element is usually denoted just $1$, $1_G$, $e$, or $e_G$.
         \item The inverse of an element $a$ in $G$ is denoted $a^{-1}$. 
-        \item If $G$ is a group whose law satisfies $ab = ba$ for any $a, b$ in $G$, then $G$ is said to be \textit{\textbf{Abelian}}. The list of examples above contains only one non-Abelian groups. 
+        \item The inverse of a product is given by $(ab)^{-1} = b^{-1}a^{-1}$. To see why: compute $(ab)(b^{-1}a^{-1})$.
+        \item If $G$ is a group whose law satisfies $ab = ba$ for any $a, b$ in $G$, then $G$ is said to be \textit{\textbf{Abelian}}. The list of examples above contains two non-Abelian groups. 
         
         \item We notice that the constraint to take \textit{only} invertible (resp. nonzero) matrices (resp. real numbers) is necessary in order to fulfill property \ref{def:group-def-inverse} of a group.
 More generally, in possession of a set $S$, with an associative law, and an element who does not affect the law\footnote{element $e$ satisfying $ae = ea = a$ for all $a$ in the set}, it is always possible to form a group, by considering only the subset of $S$ whose elements all have inverses in $S$ (in the sense of \ref{def:group-def}.\ref{def:group-def-inverse}).
@@ -59,6 +60,96 @@ More generally, in possession of a set $S$, with an associative law, and an elem
 \end{proof}
 The other proofs are analogous
 
+\subsection{Very brief look into $S_n$}
+Consider the symmetric group\footnote{the group of bijections from the set to itself} of the finite set $\{1, 2, \hdots, n\}$. This is called the \textit{Permutation group of degree n} and denoted $S_n$. This forms a group by considering the composition as the group law. If $\sigma$ and $\tau$ are two permutations of $\{1, 2, \hdots, n\}$, their respective inverses are their inverse function $\sigma^{-1}, \tau^{-1}$, and their product is defined as follows:
+\begin{equation}\label{eq:formula-permutation-product}
+    \sigma \cdot \tau = \sigma \circ \tau: j \longmapsto (\sigma \circ \tau)(j)=(\sigma(\tau(j))) 
+\end{equation}
+
+Further more, let's introduce the following notation for a given permutation $\sigma$:
+$$ \sigma = \begin{pmatrix}
+    1 & 2 & \hdots & n-1 & n \\
+    \sigma(1) & \sigma(2) & \hdots & \sigma(n-1) & \sigma(n)
+\end{pmatrix}$$ Precisely, the first line contains all of the elements of the set, and below each element is placed its \textit{image} through $\sigma$, giving the second row, which is a \textit{permutation}, AKA a rearrangement of the first line. Since there are $n!$ ways of rearranging the said line, \textbf{the order of the group $\bm{S_n}$ is $\bm{n!}$}. 
+
+\textbf{BEWARE!} $n$ is NOT THE \textbf{ORDER of $\bm{S_n}$}, it simply refers to the number of integers to permute: $\{1, 2, \hdots, n\}$
+\begin{example}
+    \label{ex:permutation-S2}
+    There are two possible bijections from $\{1, 2\}$ to itself: the identity map $id: \begin{psmallmatrix}
+        1 & 2 \\
+        1 & 2
+    \end{psmallmatrix}$, and the map $\sigma: \begin{psmallmatrix}
+        1 & 2 \\
+        2 & 1
+    \end{psmallmatrix}$. $\bm{S_2 = \{id, \sigma \}}$. And the group law is defined by the composition: 
+    \begin{equation*}
+        \begin{split}
+        \sigma \cdot \sigma (1) = \sigma(\sigma(1)) = \sigma(2) = 1 \\
+        \sigma \cdot \sigma (2) = \sigma(\sigma(2)) = \sigma(1) = 2
+        \end{split}
+    \end{equation*}
+    so $\sigma^2 = id$.
+\end{example}
+
+\begin{example}
+    
+    \label{ex:permutation-S3}
+    Let's analyse the \textbf{structure of $S_3$}
+    There are $3! = 3\cdot 2\cdot 1$ possible permutations of the set $\{1, 2, 3\}$. And those elements are precisely:
+    $$
+    id\ = \begin{psmallmatrix}
+        1 & 2 & 3 \\
+        1 & 2 & 3
+    \end{psmallmatrix}
+    , \tau_1\ = \begin{psmallmatrix}
+        1 & 2 & 3 \\
+        1 & 3 & 2
+    \end{psmallmatrix}
+    , \tau_2\ = \begin{psmallmatrix}
+        1 & 2 & 3 \\ 
+        2 & 1 & 3
+    \end{psmallmatrix}
+    , \tau_3\ = \begin{psmallmatrix}
+        1 & 2 & 3 \\
+        3 & 2 & 1
+    \end{psmallmatrix}
+    , \sigma_1 = \begin{psmallmatrix}
+        1 & 2 & 3 \\
+        2 & 3 & 1
+    \end{psmallmatrix}
+    , \sigma_2 = \begin{psmallmatrix}
+        1 & 2 & 3 \\
+        3 & 1 & 2   
+    \end{psmallmatrix}
+    $$
+\end{example}
+
+As mentionned before, the group law here is the composition of functions: by using the formula \label{eq:formula-permutation-product} we can compute for example $\sigma_1 \cdot \tau_1$: \begin{equation*}
+    \begin{split}
+    \sigma_1 \tau_1 (1) = \sigma_1(\tau_1(1)) = \sigma_1(1) = 2 \\
+    \sigma_1 \tau_1 (2) = \sigma_1(\tau_1(2)) = \sigma_1(3) = 1 \\
+    \sigma_1 \tau_1 (3) = \sigma_1(\tau_1(3)) = \sigma_1(2) = 3 \\
+    so\ \sigma_1 \cdot \tau_1 = \begin{pmatrix}
+        1 & 2 & 3 \\ 
+        2 & 1 & 3
+    \end{pmatrix} = \tau_2
+    \end{split}
+\end{equation*}
+
+Using the same method, it is possible to compute \begin{equation*}
+\begin{split}
+\tau_1 \cdot \sigma_1 = \begin{pmatrix}
+1 & 2 & 3 \\
+3 & 2 & 1
+\end{pmatrix} = \tau_3
+\end{split}
+\end{equation*} and we notice that $\tau_1 \cdot \sigma_1 \neq \sigma_1 \cdot \tau_1$ so \textbf{\textit{$\bm{S_3}$ is not abelian}}, in fact no permutation group of a set containing more than 3 elements is abelian. 
+
+\subsection{Subgroups}
+We noticed that the set $GL_n$ is a set of bijections from $R^n$ to $R^n$, and so is a subset of $Sym(R^n)$. However, it does NOT follow that \textit{any} subset of a group is also a group, we can convince ourselves of this fact by taking a group $G$, and considering the subset $G^\prime = G \setminus \{1_G\}$. \textbf{The very basic necessity a group needs to have is an identity element:} since every element of $G^\prime$ has an inverse in $G$, the only candidate as an identity element for $G^\prime$ is the identity element of $G$, which we've omitted from this set and thus $G^\prime$ does not form a group. 
+
+The following criterias encapsulate the constraints required for a subset to form a subgroup:
+
 \begin{boxedDefinition}[Subgroups]\label{def:subgroup}
     let $G$ be a group. A subset $H$ of $G$ is called a \textit{subgroup} of $G$ if it satisfies the following conditions:
     \begin{enumerate}  
@@ -76,7 +167,7 @@ The other proofs are analogous
 
     ($n = 1$): $a^1 = a$ and $a$ is in $H$. 
 
-    Let $k > 1$ and assume $a^k$ is in $H$. By this induction assumption, $a^k$ is in $H$, and since $a$ is in $H$, by closure : $a^k \cdot a = \underbrace{a \cdot \hdots \cdot a}_{k times} = a^{k+1}$ is also in $H$.
+    Let $k > 1$ and assume $a^k$ is in $H$. By this induction assumption, $a^k$ is in $H$, and since $a$ is in $H$, by closure : $a^k \cdot a = \underbrace{a \cdot \hdots \cdot a}_{k times}\cdot a = a^{k+1}$ is also in $H$.
 \end{proof}
 
 \begin{example}
@@ -87,6 +178,10 @@ The other proofs are analogous
         Note that here the law is addition, the identity element of the group is $0$, and the inverse of an element $p$ is $(-p)$. Keeping these in mind, the properties to check are if $0$ belongs to the subset, if the inverse $-a$ of an even integer is even, and if the sum $a + b$ of two even integers $a$ and $b$ is even
         
         (Question: \textit{Is the set of \textbf{odd} integers a \textbf{subgroup} of $\Z$?} \label{ex:subgroup-even-int})
+
+    \item Given an element $a$ of a group $G$. The subset $\{
+        a, a^2, a^3, \hdots
+    \}$ is a subgroup of $G$, named the subgroup \textit{generated} by $a$, where the powers of $a$ are defined by $a^n = \underbrace{a \cdot \hdots \cdot a}_{n\ times}$ with the convention $a^0 = 1_G$.
     \item The set of invertible matrices \textit{with determinant 1}: $\{M \in GL_n | det(M) = 1\} \subset GL_n$ is a subgroup of $GL_n$: it is easy to show that this subset satisfies the properties, by keeping in in mind that $det(AB) = det(A)det(B)$ for any two matrices in $GL_n$. This subgroup is also denoted $SL_n$ and is called the \textit{Special linear group}
     \item The set of complex numbers, whose modulus is equal to 1, is a subgroup of the multiplicative group of complex numbers: $\{z \in \C | |z| = 1\} \subset \C^*$. Also called \textit{Circle group}, since its elements correspond to the points of the complex plane who lie on the unit circle.
     \end{itemize}
@@ -94,7 +189,7 @@ The other proofs are analogous
 The two last examples are particular cases of a more general way to \textit{find} subgroups of a given group, by using a mapping from a group to another one and adding some additional constraints(here they are $det: GL_n \longrightarrow \R^*$, and $|\cdot|: \C^* \longrightarrow \R^*$). (section \ref{sec:morphisms} contains the details).
 
 \subsection{$(\Z, +)$ and its subgroups}
-We will keep in mind what has been explained on the additive integer group in the second example from second example in \ref{ex:subgroups-ex}.
+We will keep in mind what has been explained on the additive integer group in the second example from example \ref{ex:subgroups-ex}.
 
 The following theorem gives a characterization\footnote{a precise criteria that is particular to} of the subgroups of $\Z$
 \begin{boxedTheorem}[Subgroups of $(\Z, +)$]
@@ -109,4 +204,187 @@ The following theorem gives a characterization\footnote{a precise criteria that 
 \end{proof}
 
 \subsection{Cyclic groups}
+Let $a$ be an element of a group $G$. 
+\begin{boxedDefinition}[Subgroup generated by an element] \label{def:subgroup-generated-by-an-element}
+    The subset $\{a^n | n \in \Z\}$ = $\{1_G, a, a^2, \hdots, a^i, \hdots\}$ is a subgroup of $G$, it is called the \textit{\textbf{subgroup generated by $a$}}. And is denoted $\left\langle a \right\rangle$
+\end{boxedDefinition}
+\begin{proof} $(that\ \left\langle a \right\rangle\ is\ a\ subgroup):$
+    $1_G$ is in $\left\langle a \right\rangle$, because $a^0 = 1_G$ by convention. For any integers $i, j$: $a^i \cdot a^j = a^{i+j} \in \left\langle a \right\rangle$ so the subset is closed. Finally, the inverse of $a^i$ is given by $a^{-i}$.
+\end{proof}
+
+\begin{remark}
+         When the law of $G$ is considered as addition, keep in mind that $\left\langle a \right\rangle$ is $\{n.a | n \in \Z\} = \{1_G, a, 2a = a+1, 3a, 4a, \hdots \}$
+\end{remark}
+
+\begin{boxedDefinition}[Order of an element]
+    Let $a$ be an element of a group $G$.
+    The \textbf{\textit{order of $a$}} is the order of the group $\left\langle a \right\rangle$, and is denoted $\bm{ord(a)}$, or sometimes $\bm{o(a)}$.
+\end{boxedDefinition}
+
+\begin{boxedProposition} \label{prop:cyclic-order-finiteness}
+    Let $a$ be an element of a group $G$. The following statements are equivalent:
+    \begin{enumerate} 
+        
+        \item $n=ord(a)$ is finite
+        \item There exists an integer $k$ such that $a^k = 1_G$
+        \item $\left\langle a \right\rangle$ = $\{1_G, a, \hdots, a^n\}$
+    \end{enumerate}
+    Moreover, if $ord(a)$ is finite, it is equal to the smallest positive integer satisfying $a^k = 1_G$, and divides any other positive integer satisfying that condition: $\forall j \in \N^*, a^j = 1_G \iff ord(a) \mid j$.
+\end{boxedProposition}
+    $(1) \implies (2)$ is obvious
+
+    $(1) \iff (3)$, seemingly obvious, essentially means that the finiteness of the order of $a$ is equivalent to the elements of $\left\langle a \right\rangle$ containing \textit{no other elements} than the $n$ first powers of $a$. It can be easily proven using $a^k = a^{k\cdot q + r} = (a^k)^q\cdot a^r = 1_G^q\cdot a^r = a^r$ where $r$ is one of $\{0, \hdots, n\}$, whose existence is guaranteed from dividing $k$ by $n$.
+
+    $(2) \implies (3)$ is proven using similar operations as above.
+
+\begin{example} \label{ex:cyclic-groups}
+    \begin{itemize}
+        \item[]
+    \item Consider $\tau = \begin{psmallmatrix}
+        1 & 2 & 3 \\
+        1 & 3 & 2 
+    \end{psmallmatrix}$
+
+    By noticing that $\tau^2 = id$, we can deduce that $\left\langle \tau \right\rangle$ is finite and has two elements: $\left\langle \tau \right\rangle = \{id, \tau\}$. In fact: for an arbitrary integer $k$: $\tau^{2k + 1} = \tau^{2k} \cdot \tau$ = $(\tau^2)^k\cdot \tau = id^k\cdot\tau = \tau$ and $\tau^{2k} = id$, so for an integer $n$ whether it's odd or even, $\tau^n$ is in $\{id, \tau\}$. We also conclude that the order of $\tau$ is 2.
+
+    \item The subgroup generated by an element is not necessarily finite, consider for example the matrix $M$ = $\begin{pmatrix}
+        2  & 0 \\ 
+        0 & 2
+    \end{pmatrix}$, whose $k$-th power is $M^k$ = $\begin{pmatrix}
+    2^k  & 0 \\
+    0 & 2^k
+    \end{pmatrix}$. For any two distinct integers $m$ and $n$, $2^m \neq 2^n$, thus there are as many elements in $\left\langle M \right\rangle$ as there are integers in $\Z$, which is infinite. 
+    \item The subgroup generated by an element can be the whole group: $\Z$ = $\left\langle 1 \right\rangle$.
+    
+\end{itemize}
+\end{example}
+
+The last example is particular:
+\begin{boxedDefinition}
+    Let $a$ be an element of a group $G$. We say that \textbf{\textit{$\bm{G}$ is generated by a}} if the subgroup generated by $a$ is the whole group: $\bm{\left\langle a \right\rangle = G}$, and \textbf{\textit{$\bm{G}$ is a cyclic group}}
+\end{boxedDefinition}
+
+
 \subsection{Homomorphisms, Isomorphisms}\label{sec:morphisms}
+A few of the most important questions in group theory, is \textit{what groups "are the same"}. Here, similarity between two groups $A$ and $B$, in some sense, means that if some properties of $A$ are discovered, they also hold for $B$. 
+
+Here is another illustration of what "similarity" means: 
+
+Consider the group $S_2 = \{id, \sigma\}$, $\sigma=\begin{psmallmatrix}
+    1 & 2 \\ 
+    2 & 1
+\end{psmallmatrix}$
+
+Its multiplication table is: 
+\begin{table}[h]
+    \begin{tabular}{lll}
+     $\circ$ & id & $\sigma$ \\ \cline{2-3} 
+    \multicolumn{1}{l|}{id} & \multicolumn{1}{l|}{id} & \multicolumn{1}{l|}{$\sigma$} \\ \cline{2-3} 
+    \multicolumn{1}{l|}{$\sigma$} & \multicolumn{1}{l|}{$\sigma$} & \multicolumn{1}{l|}{$\sigma^2$} \\ \cline{2-3} 
+    \end{tabular}
+\end{table}
+
+Consider the subgroup $\{1, -1\}$ of $\C^\times$. Its multiplication table is: 
+\begin{table}[h]
+    \begin{tabular}{lll}
+     $\times$ & 1 & -1 \\ \cline{2-3} 
+    \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{-1} \\ \cline{2-3} 
+    \multicolumn{1}{l|}{-1} & \multicolumn{1}{l|}{-1} & \multicolumn{1}{l|}{-1$^2$} \\ \cline{2-3} 
+    \end{tabular}
+\end{table}
+
+Note $G_1$ the first and $G_2$ the second group. We notice that both groups look the same, not only because they have equal elements, but also their multiplication tables. The deeper meaning is that it's possible to make a correspondance (a map) from $G_1$ to $G_2$ such that two elements $a$ and $b$ from $G_1$ behave the same way as their two corresponding elements in $G_2$. (Here $id$ and $\sigma$ "behave" the same way as "1" and "-1").
+
+Let's formalise:
+\begin{boxedDefinition}
+    Let $G$ and $H$ be two groups, with respective laws $*$ and $\cdot$ and $f: G \longrightarrow H$ be a map. We say that \textbf{\textit{$\bm{f}$ is a group homomorphism}} if for any $a$ and $b$ in $G$, $f(a*b) = f(a)\cdot f(b)$.
+\end{boxedDefinition}
+
+It means that, given two elements $a$ and $b$ of $G$, the two following operations produce the same result: 
+\begin{itemize}
+\item operation 1: $(a, b) \xRightarrow{multiply} a*b \xRightarrow{f} f(a*b) = h \in H$
+\item operation 2: $(a, b) \xRightarrow{f} (f(a), f(b)) \xRightarrow{multiply} f(a)\cdot f(b) = h$
+\end{itemize}
+
+\begin{remark}
+    Let $f: G \longrightarrow H$ be a group homomorphism. The definition immediately imply the following properties:
+    \begin{itemize}
+        \item The image of the inverse is the inverse of the image: $f(g^{-1}) = f(g)^{-1}$
+        \item The image of the identity is the identity:$f(1_G) = 1_H$
+        \item The "power" of the image is the image of the power: $f(g^n) = f(g)^n$
+    \end{itemize}
+\end{remark}
+
+\begin{boxedDefinition}
+    \begin{itemize}
+    \item[]
+    
+    \item An \textit{\textbf{isomorphism}} is a bijective homomorphism. When there exists an isomorphism between two groups $f:G \longrightarrow H$, $G$ and $H$ are said to be \textit{isomorphic}, and we note: $G\cong H$.
+    \item 
+    \item
+    An \textit{\textbf{automorphism}} is an isomorphism from a group $G$ to itself: $f: G \longrightarrow G$.
+    \item[] The set of all automorphisms of a group $G$ is denoted $Aut(G)$
+    \item Let $f: G \longrightarrow H$ be a group homomorphism. 
+    \begin{itemize}
+    \item The \textbf{Kernel} of $f$ is $ker(f) = \{x \in G | f(x) = 1_H\}$: the subset of $G$ whose elements are mapped to $1_H$
+    \item The \textbf{Image} of $f$ is $Im(f) = \{f(x) | x \in G\}$: the subset of $H$ who are images of elements of $G$, also denoted $f(G)$.
+    \end{itemize}
+    \end{itemize}
+\end{boxedDefinition}
+
+\input{Lectures/assets/Pictures/kernel_image.tex}
+
+\begin{boxedProposition} \label{prop:injective-criteria}
+let $f: G \longrightarrow H$ be a group homomorphism, then $ker(f)$ is a subgroup of $G$ and $Im(f)$ is a subgroup of $H$. (Problem \ref{exo:ker-image})
+\end{boxedProposition}
+
+\begin{proposition*}
+    let $f: G\longrightarrow H$ be a group homomorphism, $f$ is injective if and only if $ker(f) = \{1_G\}$. 
+\end{proposition*}
+\begin{proof}
+    Use $f(x) = f(y) \iff f(x)f(y)^{-1} = 1_H \iff f(xy) = 1_H$
+\end{proof}
+
+Here are a few examples of common group homomorphisms: 
+\begin{example}
+    \begin{itemize}
+        \item []
+        \item For any group $G$, $H$, we define the \textit{trivial homomorphism} as $f: G \longrightarrow H$, such that $f(x) = 1_H$ for any $x$ in $G$. Although it has not many interesting properties, its existence means that there is at least one homomorphism between any two arbitrary groups. 
+        \item det: $GL_2(\R) \longrightarrow \R^*$ is a group homomorphism whose kernel is $SL_2(\R)$, the set of invertible matrices $2\times 2$ with determinant 1. Thus, by proposition \ref{prop:injective-criteria}, $det$ is NOT injective, since $SL_2(R)$ does not only contain the identity matrix, but also $\begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}$, so $det$ is not an isomorphisms. More generally, for $n \geq 2$, $det: GL_n \longrightarrow R^*$ is never injective since there is always a non-identity matrix whose determinant is 1: $\begin{pmatrix}
+            -1 & 0 & & \hdots & 0 \\
+            0 & -1 &  &      & 0\\
+            & & 1 & &  \vdots \\
+            \vdots & & & \ddots & \\
+            0 & \hdots & & \hdots & 1   
+        \end{pmatrix}$
+
+        \item exp: $(R, +) \longrightarrow (R\setminus\{0\}, \times)$, defined by $exp(x) = e^x$ is a group homomorphism. This follows from the very well-known algebraic property of exponentiation defined on real numbers: $e^{a + b} = e^a\cdot e^b$
+        \item Let $G = \left\langle g \right\rangle$ be a cyclic group. Then $f: \Z \longrightarrow G$ defined by $f(k) = g^k$,  is a group homomorphism, and it is an isomorphism if and only if $G$ is infinite. We have previously (see \ref{ex:cyclic-groups}) used this fact to show that $\left\langle \begin{pmatrix}
+            2 & 0 \\
+            0 & 2
+        \end{pmatrix}\right\rangle$ is not finite, by considering the isomorphism $k \longmapsto \begin{pmatrix} 2^k & 0 \\ 0 & 2^k \end{pmatrix}$
+        The statements in proposition \ref{prop:cyclic-order-finiteness} are used to prove the previous claim.
+
+        \item Let $G = \left\langle x \right\rangle$ and $H = \left\langle y  \right\rangle$ be two cyclic groups. Under some conditions on $ord(x)$ and $ord(y)$, the map $x^k \longmapsto y^k$ is a group homomorphism. (See Problem \ref{exo:cyclic-morphism})
+
+        \item The absolute value map $|\cdot|: \C^* \longrightarrow \R^*$ is a group homomorphism. It is not an isomorphism as it is neither injective nor surjective. 
+        
+        \item Consider the group $S_3$. We will introduce a new representation of an element $\sigma$ of $S_3$ on a $3 \times 3$ matrix as follows: for each column $i$, if $j=\sigma(i)$, place 1 at the $j$-th row of column $i$ and place 0 everywhere else on that colunm. For example, let $\sigma = \begin{psmallmatrix}
+            1 & 2 & 3 \\
+            2 & 3 & 1
+        \end{psmallmatrix}$, the corresponding matrix is $\begin{pmatrix}
+            0 & 0 & 1 \\
+            1 &0 &0 \\
+            0& 1& 0
+        \end{pmatrix}
+        $. This matrix is invertible, so is in $GL_n$. 
+        Using the analogous process to generalise this process to $S_n$, We can verify\footnote{good exercise} that the map that sends $\sigma$ to $P_{\sigma}$ is an injective group homomorphism from $S_n$ to $GL_n$. 
+        \item Let $E$ be a finite set containing $n$ elements: $\{x_1, \hdots, h_n\}$, let $Sym(E)$ be the group of bijections from $E$ to $E$. Then $Sym(E)$ is isomorphic to $S_n$. An explicit homomorphism is given by: 
+        \begin{equation*}
+            \begin{split}
+                S_n \longrightarrow Sym(E) \\
+                \sigma \longmapsto (f: x_i \mapsto x_{\sigma(i)})
+            \end{split}
+        \end{equation*}
+    \end{itemize}
+\end{example}
